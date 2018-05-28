@@ -7,6 +7,7 @@
     <groupId>com.nplekhanov</groupId>
     <artifactId>es6dev4j</artifactId>
     <version>1.0</version>
+    <url>https://github.com/kkolyan/es6dev4j</url>
 
     <description>
         helps to develop in-broser compiling es6 frontend applications
