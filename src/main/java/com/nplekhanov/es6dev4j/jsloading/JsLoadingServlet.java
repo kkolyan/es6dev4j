@@ -36,6 +36,7 @@ public class JsLoadingServlet extends HttpServlet {
         if (path == null) {
             String base = request.getParameter("base");
             String rootModule = request.getParameter("root");
+            String v = request.getParameter("v");
             Collection<String> providedModules = new ArrayList<>();
             String provided = request.getParameter("provided");
             if (provided != null) {
@@ -47,8 +48,8 @@ public class JsLoadingServlet extends HttpServlet {
                             "    var exports = {};// babel-standalone doesn't want to work with modules without this hack...\n" +
                             "</script>"),
                     jsLoader.collectDependentModuleNames(rootModule, providedModules).stream()
-                            .map(scriptUri -> String.format("<script type=\"text/babel\" src=\"%s/%s\"></script>",
-                                    escapeHtml4(base), escapeHtml4(scriptUri)))
+                            .map(scriptUri -> String.format("<script type=\"text/babel\" src=\"%s/%s?v=%s\"></script>",
+                                    escapeHtml4(base), escapeHtml4(scriptUri), escapeHtml4(v)))
             )
                     .collect(Collectors.joining("\n"));
             response.getWriter().print(scripts);
